@@ -1,7 +1,7 @@
 // Firebase Repository
 import { ProductRepository } from "./product.repository.interface.js";
 import { CollectionReference } from "firebase-admin/firestore";
-import { db } from "../../../lib/firebase.js";
+import { db } from "../../../config/firebase.js";
 import { ProductDb, Product } from "../model/product.model.js";
 import { CreateProductInput, UpdateProductInput } from "../model/ProductInput.type.js";
 
