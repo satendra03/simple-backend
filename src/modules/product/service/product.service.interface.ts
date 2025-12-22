@@ -4,8 +4,8 @@ import { CreateProductInput, UpdateProductInput } from "../model/ProductInput.ty
 
 export interface ProductService {
     getAllProducts(): Promise<Product[]>;
-    getProductById(id: string): Promise<Product | null>;
+    getProductById(productId: string): Promise<Product>;
     createProduct(product: CreateProductInput): Promise<Product>;
-    updateProduct(id: string, updates: UpdateProductInput): Promise<Product>;
-    deleteProduct(id: string): Promise<boolean>;
+    updateProduct(productId: string, updates: UpdateProductInput): Promise<Product>;
+    deleteProduct(productId: string): Promise<Product>;
 }

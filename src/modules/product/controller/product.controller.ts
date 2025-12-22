@@ -26,9 +26,6 @@ export class ProductController {
         try {
             const productId = req.params.productId;
             const product = await this.productService.getProductById(productId);
-            if (!product) {
-                return res.status(404).json(ApiResponse.error("Product not found"));
-            }
             const response = ProductMapper.toResponseDto(product);
 
             res.status(200).json(ApiResponse.success({
@@ -58,7 +55,9 @@ export class ProductController {
         try {
             const productId = req.params.productId;
             const updates: UpdateProductInput = req.body;
-            const product = await this.productService.updateProduct(productId, updates);
+            
+            const updatedProductInput = ProductMapper.toUpdateInput(updates);
+            const product = await this.productService.updateProduct(productId, updatedProductInput);
             const response = ProductMapper.toResponseDto(product);
 
             res.status(200).json(ApiResponse.success({
@@ -72,12 +71,12 @@ export class ProductController {
     deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const productId = req.params.productId;
-            const deleted: boolean = await this.productService.deleteProduct(productId);
-            if(!deleted) {
-                return res.status(404).json(ApiResponse.error("Product not found"));
-            }
+            const product = await this.productService.deleteProduct(productId);
+            const response = ProductMapper.toResponseDto(product);
+            
             return res.status(200).json(ApiResponse.success({
                 message: "Product deleted successfully",
+                data: response
             }));
         } catch (err) {
             next(err);

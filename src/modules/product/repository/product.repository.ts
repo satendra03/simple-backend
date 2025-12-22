@@ -16,7 +16,6 @@ export class FireStoreProductRepository implements ProductRepository {
 
         return CollectionSnapshot.docs.map((doc) => {
             const data = doc.data(); // Doc data
-
             return {
                 id: doc.id,
                 name: data.name,
@@ -80,11 +79,26 @@ export class FireStoreProductRepository implements ProductRepository {
             ...(data as ProductDb),
         } ; // Return updated doc
     }
-    async deleteProduct(id: string): Promise<boolean> {
+    async deleteProduct(id: string): Promise<Product | null> {
         const docRef = this.collection.doc(id); // Doc refrence
         const doc = await docRef.get(); // Doc snapshot
-        if (!doc.exists) { return false; } // Doc not found
+        if (!doc.exists) { return null; } // Doc not found
+        
+        const data = doc.data(); 
+        
         await docRef.delete(); // Delete doc
-        return true; // Return true
+        
+        if(!data) return null;
+
+        return {
+            id: doc.id,
+            name: data.name,
+            description: data.description,
+            price: data.price,
+            image: data.image,
+            category: data.category,
+            createdAt: data.createdAt,
+            updatedAt: data.updatedAt
+        }; // Return deleted product
     }
 }

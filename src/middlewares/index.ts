@@ -2,8 +2,8 @@
 
 import cors from "cors";
 import express, { Application } from "express";
-// import { errorHandler } from "./error.middleware.js";
-// import { notFoundHandler } from "./notFound.middleware.js";
+import { errorMiddleware } from "./error.middleware.js";
+import { notFoundMiddleware } from "./notFound.middleware.js";
 
 //  CORS, JSON, URL encoded
 export const registerMiddlewares = (app:Application) => {
@@ -14,6 +14,6 @@ export const registerMiddlewares = (app:Application) => {
 
 // Not found and error handlers
 export const registerErrorHandlers = (app:Application) => {
-    // app.use(notFoundHandler);
-    // app.use(errorHandler);
+    app.use(notFoundMiddleware);
+    app.use(errorMiddleware);
 };

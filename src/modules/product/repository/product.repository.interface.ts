@@ -1,11 +1,11 @@
 // repository/product.repository.interface.ts
 import { Product } from "../model/product.model.js";
-import { CreateProductDto } from "../dto/CreateProduct.dto.js";
+import { CreateProductInput, UpdateProductInput } from "../model/ProductInput.type.js";
 
 export interface ProductRepository {
   getAllProducts(): Promise<Product[]>;
-  getProductById(id: string): Promise<Product | null>;
-  createProduct(product: CreateProductDto): Promise<Product>;
-  updateProduct(id: string, updates: Partial<CreateProductDto>): Promise<Product | null>;
-  deleteProduct(id: string): Promise<boolean>;
+  getProductById(productId: string): Promise<Product | null>;
+  createProduct(product: CreateProductInput): Promise<Product>;
+  updateProduct(productId: string, updates: UpdateProductInput): Promise<Product>;
+  deleteProduct(productId: string): Promise<Product | null>;
 }

@@ -5,9 +5,9 @@ import { productController } from "./product.module.js";
 const productRouter = Router();
 
 productRouter.get("/", productController.getAllProducts); // Get All Products
-productRouter.get("/:id", productController.getProductById); // Get Product By Id
+productRouter.get("/:productId", productController.getProductById); // Get Product By Id
 productRouter.post("/", productController.createProduct); // Create Product
-productRouter.patch("/:id", productController.updateProduct); // Update Product
-productRouter.delete("/:id", productController.deleteProduct); // Delete Product
+productRouter.patch("/:productId", productController.updateProduct); // Update Product
+productRouter.delete("/:productId", productController.deleteProduct); // Delete Product
 
 export default productRouter;
