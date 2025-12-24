@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from "express";
 import { ApiResponse } from "../../../shared/ApiResponse.js";
 import { ProductService } from "../service/product.service.interface.js";
 import { ProductMapper } from "../mapper/product.mapper.js";
-import { UpdateProductInput } from "../model/ProductInput.type.js";
+import { UpdateProductInput } from "../model/productInput.model.js";
 
 export class ProductController {
     constructor(private productService: ProductService) {}
@@ -18,8 +18,8 @@ export class ProductController {
                 message: "Products fetched successfully",
                 data: response
             }));
-        } catch (err) {
-            next(err);
+        } catch (error) {
+            next(error);
         }
     };
     getProductById = async (req: Request, res: Response, next: NextFunction) => {
@@ -32,8 +32,8 @@ export class ProductController {
                 message: "Product fetched successfully",
                 data: response
             }));
-        } catch (err) {
-            next(err);
+        } catch (error) {
+            next(error);
         }
     };
     createProduct = async (req: Request, res: Response, next: NextFunction) => {
@@ -47,15 +47,15 @@ export class ProductController {
                 message: "Product created successfully",
                 data: response
             }));
-        } catch (err) {
-            next(err);
+        } catch (error) {
+            next(error);
         }
     };
     updateProduct = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const productId = req.params.productId;
             const updates: UpdateProductInput = req.body;
-            
+
             const updatedProductInput = ProductMapper.toUpdateInput(updates);
             const product = await this.productService.updateProduct(productId, updatedProductInput);
             const response = ProductMapper.toResponseDto(product);
@@ -64,8 +64,8 @@ export class ProductController {
                 message: "Product updated successfully",
                 data: response
             }));
-        } catch (err) {
-            next(err);
+        } catch (error) {
+            next(error);
         }
     };
     deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
@@ -78,8 +78,8 @@ export class ProductController {
                 message: "Product deleted successfully",
                 data: response
             }));
-        } catch (err) {
-            next(err);
+        } catch (error) {
+            next(error);
         }
     };
 }

@@ -1,6 +1,6 @@
 //  Product Service Interface
 import { Product } from "../model/product.model.js";
-import { CreateProductInput, UpdateProductInput } from "../model/ProductInput.type.js";
+import { CreateProductInput, UpdateProductInput } from "../model/productInput.model.js";
 
 export interface ProductService {
     getAllProducts(): Promise<Product[]>;

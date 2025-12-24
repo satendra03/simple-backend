@@ -1,2 +1,2 @@
-import { CreateProductDto } from "./CreateProduct.dto.js";
+import { CreateProductDto } from "./createProduct.dto.js";
 export interface UpdateProductDto extends Partial<CreateProductDto> {}
