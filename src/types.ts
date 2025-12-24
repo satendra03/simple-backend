@@ -1,0 +1,1 @@
+export { Product } from "./modules/product/model/product.model.js";

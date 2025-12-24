@@ -1,12 +1,14 @@
 // All Routes
 
 import { Application } from "express";
-import productRouter from "./modules/product/index.js";
-import userRouter from "./modules/user/index.js";
+import productRouter from "./modules/product/product.route.js";
+import userRouter from "./modules/user/user.route.js";
+import cartRoute from "./modules/cart/cart.route.js";
 
 const modules = [ 
     productRouter,
-    userRouter
+    userRouter,
+    cartRoute
 ];
 
 export const registerRoutes = (app: Application) => {

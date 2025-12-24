@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { FireStoreUserService } from "../service/user.service.js";
 import { UserMapper } from "../mapper/user.mapper.js";
 import { ApiResponse } from "../../../shared/ApiResponse.js";
+import { UserService } from "../service/user.service.interface.js";
 
 export class UserController {
-    constructor(private userService: FireStoreUserService) {}
+    constructor(private userService: UserService) {}
     getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const users = await this.userService.getAllUsers();

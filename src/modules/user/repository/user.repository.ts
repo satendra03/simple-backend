@@ -10,21 +10,17 @@ export class FireStoreUserRepository implements UserRepositoryInterface {
         this.collection = db.collection("users") as CollectionReference<UserDb>;
     }
     
-    async getAll(): Promise<User[]> {
+    getAll = async (): Promise<User[]> => {
         const collectionSnapshot = await this.collection.get();
         return collectionSnapshot.docs.map((doc) => {
             const data = doc.data();
             return {
                 id: doc.id,
-                name: data.name,
-                email: data.email,
-                password: data.password,
-                createdAt: data.createdAt,
-                updatedAt: data.updatedAt,
+                ...(data as UserDb)
             };
         });
     }
-    async getById(userId: string): Promise<User | null> {
+    getById = async (userId: string): Promise<User | null> => {
         const docRef = this.collection.doc(userId);
         const doc = await docRef.get();
 
@@ -35,14 +31,10 @@ export class FireStoreUserRepository implements UserRepositoryInterface {
 
         return {
             id: doc.id,
-            name: data.name,
-            email: data.email,
-            password: data.password,
-            createdAt: data.createdAt,
-            updatedAt: data.updatedAt,
+            ...(data as UserDb)
         };
     }
-    async create(user: CreateUserInput): Promise<User> {
+    create = async (user: CreateUserInput): Promise<User> => {
         const now = new Date();
         const doc = await this.collection.add({
             ...user,
@@ -56,7 +48,7 @@ export class FireStoreUserRepository implements UserRepositoryInterface {
             updatedAt: now,
         };
     }
-    async update(userId: string, updates: UpdateUserInput): Promise<User> {
+    update = async (userId: string, updates: UpdateUserInput): Promise<User> => {
         const docRef = this.collection.doc(userId);
         const now = new Date();
 
@@ -73,7 +65,7 @@ export class FireStoreUserRepository implements UserRepositoryInterface {
             ...(data as UserDb),
         };
     }
-    async delete(userId: string): Promise<User | null> {
+    delete = async (userId: string): Promise<User | null> => {
         const docRef = this.collection.doc(userId);
         const doc = await docRef.get();
         const data = doc.data();

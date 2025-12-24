@@ -11,24 +11,18 @@ export class FireStoreProductRepository implements ProductRepository {
         this.collection = db.collection("products") as CollectionReference<ProductDb>;
     }
 
-    async getAll(): Promise<Product[]> {
+    getAll = async (): Promise<Product[]> => {
         const CollectionSnapshot = await this.collection.get(); // Collection snapshot
 
         return CollectionSnapshot.docs.map((doc) => {
             const data = doc.data(); // Doc data
             return {
                 id: doc.id,
-                name: data.name,
-                description: data.description,
-                price: data.price,
-                image: data.image,
-                category: data.category,
-                createdAt: data.createdAt,
-                updatedAt: data.updatedAt
+                ...(data as ProductDb)
             };
         });
     }
-    async getById(id: string): Promise<Product | null> {
+    getById = async (id: string): Promise<Product | null> => {
         const docRef = this.collection.doc(id); // Doc refrence
         const doc = await docRef.get(); // Doc snapshot
 
@@ -39,16 +33,10 @@ export class FireStoreProductRepository implements ProductRepository {
 
         return {
             id: doc.id,
-            name: data.name,
-            description: data.description,
-            price: data.price,
-            image: data.image,
-            category: data.category,
-            createdAt: data.createdAt,
-            updatedAt: data.updatedAt
+            ...(data as ProductDb)
         }; // Return product
     }
-    async create(product: CreateProductInput): Promise<Product> {
+    create = async (product: CreateProductInput): Promise<Product> => {
         const now = new Date(); // Current time
         const doc = await this.collection.add({
             ...product,
@@ -62,7 +50,7 @@ export class FireStoreProductRepository implements ProductRepository {
             updatedAt: now,
         }; // Return product
     }
-    async update(id: string, updates: UpdateProductInput): Promise<Product | null> {
+    update = async (id: string, updates: UpdateProductInput): Promise<Product | null> => {
         const docRef = this.collection.doc(id); // Doc refrence
         let doc = await docRef.get(); // Doc snapshot
         if (!doc.exists) { return null; } // Doc not found
@@ -82,7 +70,7 @@ export class FireStoreProductRepository implements ProductRepository {
             ...(data as ProductDb),
         }; // Return updated doc
     }
-    async delete(id: string): Promise<Product | null> {
+    delete = async (id: string): Promise<Product | null> => {
         const docRef = this.collection.doc(id); // Doc refrence
         const doc = await docRef.get(); // Doc snapshot
         if (!doc.exists) { return null; } // Doc not found

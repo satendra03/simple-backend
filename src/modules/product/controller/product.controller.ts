@@ -5,6 +5,8 @@ import { ApiResponse } from "../../../shared/ApiResponse.js";
 import { ProductService } from "../service/product.service.interface.js";
 import { ProductMapper } from "../mapper/product.mapper.js";
 import { UpdateProductInput } from "../model/productInput.model.js";
+import { UpdateProductDto } from "../dto/updateProduct.dto.js";
+import { CreateProductDto } from "../dto/createProduct.dto.js";
 
 export class ProductController {
     constructor(private productService: ProductService) {}
@@ -38,7 +40,7 @@ export class ProductController {
     };
     createProduct = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const input = req.body;
+            const input = req.body as CreateProductDto;
             const createProductInput = ProductMapper.toCreateInput(input);
             const product = await this.productService.createProduct(createProductInput);
             const response = ProductMapper.toResponseDto(product);
@@ -54,7 +56,7 @@ export class ProductController {
     updateProduct = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const productId = req.params.productId;
-            const updates: UpdateProductInput = req.body;
+            const updates = req.body as UpdateProductDto;
 
             const updatedProductInput = ProductMapper.toUpdateInput(updates);
             const product = await this.productService.updateProduct(productId, updatedProductInput);

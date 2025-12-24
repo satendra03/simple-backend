@@ -10,4 +10,7 @@ userRouter.post("/", validateCreateUser, userController.createUser);
 userRouter.patch("/:userId", validateUserId, validateUserEmail, validateUpdateUser, userController.updateUser);
 userRouter.delete("/:userId", validateUserId, userController.deleteUser);
 
-export default userRouter;
+export default {
+    path: "/users",
+    router: userRouter
+};

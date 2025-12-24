@@ -11,4 +11,7 @@ productRouter.post("/", validateCreateProduct, productController.createProduct);
 productRouter.patch("/:productId", validateProductId, validateUpdateProduct, productController.updateProduct); // Update Product
 productRouter.delete("/:productId", validateProductId, productController.deleteProduct); // Delete Product
 
-export default productRouter;
+export default {
+    path: "/product",
+    router: productRouter
+};
