@@ -1,6 +1,9 @@
 import { ApiResponse } from "@/shared/ApiResponse.js";
 import { NextFunction, Request, Response } from "express";
 import { AuthService } from "../service/auth.service.interface.js";
+import { AuthMapper } from "../mapper/auth.mapper.js";
+import { SignupUserDto } from "../dto/SignupUser.dto.js";
+import { LoginUserDto } from "../dto/LoginUser.dto.js";
 import { CreateUserInput } from "@/modules/user/model/userInput.model.js";
 
 export class AuthController {
@@ -8,31 +11,34 @@ export class AuthController {
 
   login = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { email, password } = req.body;
+      const { email, password } = req.body as LoginUserDto;
+
       const token = await this.authService.login(email, password);
+      const response = AuthMapper.toResponseDto(token);
+
       res.status(200).json(ApiResponse.success({
         message: "Login successful",
-        data: token,
+        data: response,
       }));
-    } catch (err) {
-      next(err);
+    } catch (error) {
+      next(error);
     }
   };
 
   signup = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { email, password, name } = req.body as CreateUserInput;
-      const token = await this.authService.signup({
-        email,
-        password,
-        name,
-      });
-      res.status(200).json(ApiResponse.success({
+      const { email, password, name } = req.body as SignupUserDto;
+      const user: CreateUserInput = AuthMapper.toSignupDto({email, password, name});
+
+      const token = await this.authService.signup(user);
+      const response = AuthMapper.toResponseDto(token);
+      
+      res.status(201).json(ApiResponse.success({
         message: "Signup successful",
-        data: token,
+        data: response,
       }));
-    } catch (err) {
-      next(err);
+    } catch (error) {
+      next(error);
     }
   };
 }

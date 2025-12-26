@@ -17,6 +17,11 @@ export class FireStoreUserService implements UserService {
         if (!user) throw new NotFoundError("User not found");
         return user;
     }
+    getUserByEmail = async (email: string): Promise<User> => {
+        const user = await this.repository.getByEmail(email);
+        if (!user) throw new NotFoundError("User not found");
+        return user;
+    }
     createUser = async (user: CreateUserInput): Promise<User> => {
         return await this.repository.create(user);
     }
