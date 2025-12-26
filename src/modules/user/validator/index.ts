@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { CreateUserDto } from "../dto/CreateUser.dto.js";
-import { BadRequestError } from "../../../shared/ApiError.js";
-import { isEmail, isString } from "../../../utils/index.js";
+import { BadRequestError } from "@/shared/ApiError.js";
+import { isEmail, isString } from "@/utils/index.js";
 import { UpdateUserDto } from "../dto/UpdateUser.dto.js";
 
 export const validateCreateUser = (req: Request, res: Response, next: NextFunction) => {

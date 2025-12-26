@@ -1,7 +1,7 @@
 // Firebase Repository
 import { ProductRepository } from "./product.repository.interface.js";
 import { CollectionReference } from "firebase-admin/firestore";
-import { db } from "../../../config/firebase.js";
+import { db } from "@/config/firebase.config.js";
 import { ProductDb, Product } from "../model/product.model.js";
 import { CreateProductInput, UpdateProductInput } from "../model/productInput.model.js";
 
@@ -54,7 +54,7 @@ export class FireStoreProductRepository implements ProductRepository {
         const docRef = this.collection.doc(id); // Doc refrence
         let doc = await docRef.get(); // Doc snapshot
         if (!doc.exists) { return null; } // Doc not found
-        
+
         const now = new Date(); // Current time
         await docRef.update({
             ...updates,

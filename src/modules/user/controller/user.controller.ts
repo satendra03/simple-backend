@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { UserMapper } from "../mapper/user.mapper.js";
-import { ApiResponse } from "../../../shared/ApiResponse.js";
+import { ApiResponse } from "@/shared/ApiResponse.js";
 import { UserService } from "../service/user.service.interface.js";
 
 export class UserController {

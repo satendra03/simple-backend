@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { CreateCartDto } from "../dto/createCart.dto.js";
-import { BadRequestError } from "../../../shared/ApiError.js";
-import { isString } from "../../../utils/index.js";
+import { BadRequestError } from "@/shared/ApiError.js";
+import { isString } from "@/utils/index.js";
 import { UpdateCartDto } from "../dto/updateCart.dto.js";
 
 export const validateCreateCart = (req: Request, res: Response, next: NextFunction) => {

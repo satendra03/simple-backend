@@ -2,7 +2,7 @@
   "name": "simple-backend",
   "version": "1.0.0",
   "description": "this is just a simple backend project",
-  "main": "src/server.ts",
+  "main": "dist/server.js",
   "type": "module",
   "scripts": {
     "start": "node dist/server.js",
@@ -12,12 +12,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "firebase-admin": "^13.6.0"
+    "firebase-admin": "^13.6.0",
+    "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^25.0.3",
@@ -25,6 +28,7 @@
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }

@@ -1,10 +1,9 @@
 // ProductController
 
 import { Request, Response, NextFunction } from "express";
-import { ApiResponse } from "../../../shared/ApiResponse.js";
+import { ApiResponse } from "@/shared/ApiResponse.js";
 import { ProductService } from "../service/product.service.interface.js";
 import { ProductMapper } from "../mapper/product.mapper.js";
-import { UpdateProductInput } from "../model/productInput.model.js";
 import { UpdateProductDto } from "../dto/updateProduct.dto.js";
 import { CreateProductDto } from "../dto/createProduct.dto.js";
 

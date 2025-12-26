@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { BadRequestError } from "../../../shared/ApiError.js";
+import { BadRequestError } from "@/shared/ApiError.js";
 import { CreateProductDto } from "../dto/createProduct.dto.js";
 import { UpdateProductDto } from "../dto/updateProduct.dto.js";
-import { isNumber, isString } from "../../../utils/index.js";
+import { isNumber, isString } from "@/utils/index.js";
 
 export const validateCreateProduct = (req: Request, res: Response, next: NextFunction) => {
   const product = req.body as CreateProductDto;

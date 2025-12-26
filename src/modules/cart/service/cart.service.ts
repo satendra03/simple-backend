@@ -1,7 +1,7 @@
 import { CartService } from "./cart.service.interface.js";
 import { FireStoreCartRepository } from "../repository/cart.repository.js";
 import { Cart } from "../model/cart.model.js";
-import { NotFoundError } from "../../../shared/ApiError.js";
+import { NotFoundError } from "@/shared/ApiError.js";
 import { CreateCartInput, UpdateCartInput } from "../model/cartInput.model.js";
 
 export class FireStoreCartService implements CartService {

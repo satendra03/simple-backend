@@ -1,7 +1,7 @@
 import { CartRepositoryInterface } from "./cart.repository.interface.js";
 import { CollectionReference } from "firebase-admin/firestore";
 import { Cart, CartDb } from "../model/cart.model.js";
-import { db } from "../../../config/firebase.js";
+import { db } from "@/config/firebase.config.js";
 import { CreateCartInput, UpdateCartInput } from "../model/cartInput.model.js";
 
 export class FireStoreCartRepository implements CartRepositoryInterface {

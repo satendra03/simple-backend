@@ -2,7 +2,7 @@ import { UserService } from "./user.service.interface.js";
 import { User } from "../model/user.model.js";
 import { CreateUserInput, UpdateUserInput } from "../model/userInput.model.js";
 import { FireStoreUserRepository } from "../repository/user.repository.js";
-import { NotFoundError } from "../../../shared/ApiError.js";
+import { NotFoundError } from "@/shared/ApiError.js";
 
 export class FireStoreUserService implements UserService {
     constructor(private repository: FireStoreUserRepository) {}

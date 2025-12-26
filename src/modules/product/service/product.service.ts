@@ -2,7 +2,7 @@
 
 import { ProductService } from "./product.service.interface.js";
 import { Product } from "../model/product.model.js";
-import { NotFoundError } from "../../../shared/ApiError.js";
+import { NotFoundError } from "@/shared/ApiError.js";
 import { CreateProductInput, UpdateProductInput } from "../model/productInput.model.js";
 import { ProductRepository } from "../repository/product.repository.interface.js";
 

@@ -1,4 +1,4 @@
-import { Product } from "../../../types.js";
+import { Product } from "@/types.js";
 
 export interface CartResponseDto {
     id: string;

@@ -1,15 +1,15 @@
-import { UserRepositoryInterface } from "./user.repository.interface.js";
+import { UserRepository } from "./user.repository.interface.js";
 import { User, UserDb } from "../model/user.model.js";
 import { CreateUserInput, UpdateUserInput } from "../model/userInput.model.js";
 import { CollectionReference } from "firebase-admin/firestore";
-import { db } from "../../../config/firebase.js";
+import { db } from "@/config/firebase.config.js";
 
-export class FireStoreUserRepository implements UserRepositoryInterface {
+export class FireStoreUserRepository implements UserRepository {
     private collection: CollectionReference<UserDb>;
     constructor() {
         this.collection = db.collection("users") as CollectionReference<UserDb>;
     }
-    
+
     getAll = async (): Promise<User[]> => {
         const collectionSnapshot = await this.collection.get();
         return collectionSnapshot.docs.map((doc) => {
@@ -34,15 +34,31 @@ export class FireStoreUserRepository implements UserRepositoryInterface {
             ...(data as UserDb)
         };
     }
+    getByEmail = async (email: string): Promise<User | null> => {
+        const collectionSnapshot = await this.collection.where("email", "==", email).get();
+        if (collectionSnapshot.empty) return null;
+
+        const doc = collectionSnapshot.docs[0];
+        const data = doc.data();
+        if (!data) return null;
+
+        return {
+            id: doc.id,
+            ...(data as UserDb),
+        };
+    }
+
     create = async (user: CreateUserInput): Promise<User> => {
         const now = new Date();
         const doc = await this.collection.add({
+            role: "user", // Default role
             ...user,
             createdAt: now,
             updatedAt: now,
         });
         return {
             id: doc.id,
+            role: "user", // Default role
             ...user,
             createdAt: now,
             updatedAt: now,
@@ -59,7 +75,7 @@ export class FireStoreUserRepository implements UserRepositoryInterface {
 
         const doc = await docRef.get();
         const data = doc.data();
-        
+
         return {
             id: doc.id,
             ...(data as UserDb),

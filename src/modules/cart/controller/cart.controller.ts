@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { CartService } from "../service/cart.service.interface.js";
-import { ApiResponse } from "../../../shared/ApiResponse.js";
-import { CartMapper } from "../mapper/cart.mapper.js";
-import { CreateCartDto } from "../dto/createCart.dto.js";
-import { UpdateCartDto } from "../dto/updateCart.dto.js";
+import { CartService } from "@/modules/cart/service/cart.service.interface.js";
+import { ApiResponse } from "@/shared/ApiResponse.js";
+import { CartMapper } from "@/modules/cart/mapper/cart.mapper.js";
+import { CreateCartDto } from "@/modules/cart/dto/createCart.dto.js";
+import { UpdateCartDto } from "@/modules/cart/dto/updateCart.dto.js";
 
 export class CartController {
-    constructor(private cartService: CartService) {}
+    constructor(private cartService: CartService) { }
     getAllCarts = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const carts = await this.cartService.getAllCarts();
