@@ -23,10 +23,11 @@ export class FireStoreAuthService implements AuthService {
 
   signup = async (user: CreateUserInput) => {
     const email = user.email;
+    const password = user.password;
     const existingUser = await this.userService.getUserByEmail(email);
     if (existingUser) throw new UnauthorizedError("User already exists");
 
-    const hashedPassword = await hashPassword(user.password);
+    const hashedPassword = await hashPassword(password);
     const newUser = await this.userService.createUser({
       ...user,
       password: hashedPassword,

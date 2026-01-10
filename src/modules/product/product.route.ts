@@ -9,8 +9,8 @@ const productRouter = Router();
 
 productRouter.get("/", productController.getAllProducts); // Get All Products
 productRouter.get("/:productId", validateProductId, productController.getProductById); // Get Product By Id
-productRouter.post("/", authMiddleware, validateCreateProduct, productController.createProduct); // Create Product
-productRouter.patch("/:productId", authMiddleware, validateProductId, validateUpdateProduct, productController.updateProduct); // Update Product
+productRouter.post("/", authMiddleware, isAdmin, validateCreateProduct, productController.createProduct); // Create Product
+productRouter.patch("/:productId", authMiddleware, isAdmin, validateProductId, validateUpdateProduct, productController.updateProduct); // Update Product
 productRouter.delete("/:productId", authMiddleware, isAdmin, validateProductId, productController.deleteProduct); // Delete Product
 
 export default {

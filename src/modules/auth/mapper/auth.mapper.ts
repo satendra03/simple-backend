@@ -9,7 +9,7 @@ export class AuthMapper {
         };
     }
 
-    static toSignupDto(user: SignupUserDto): CreateUserInput {
+    static toSignupInput(user: SignupUserDto): CreateUserInput {
         let { email, password, name, role } = user;
         return {
             email: email.trim().toLowerCase(),

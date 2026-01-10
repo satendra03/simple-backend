@@ -31,6 +31,19 @@ export class UserController {
             next(error);
         }
     }
+    getUserByEmail = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const email = req.params.email;
+            const user = await this.userService.getUserByEmail(email);
+            const response = UserMapper.toResponseDto(user);
+            res.status(200).json(ApiResponse.success({
+                message: "User fetched successfully",
+                data: response
+            }));
+        } catch (error) {
+            next(error);
+        }
+    }
     createUser = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const input = req.body;

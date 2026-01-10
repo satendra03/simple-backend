@@ -5,13 +5,14 @@ import { authMiddleware } from "@/middlewares/auth.middleware.js";
 import { isAdmin } from "@/middlewares/admin.middleware.js";
 
 const userRouter = Router();
-userRouter.use(authMiddleware);
 
-userRouter.get("/", isAdmin, userController.getAllUsers);
-userRouter.get("/:userId", validateUserId, userController.getUserById);
+userRouter.use(authMiddleware); // Apply to all user routes
+userRouter.get("/", userController.getAllUsers); // Get All Users
+userRouter.get("/:userId", validateUserId, userController.getUserById); // Get User By Id
+userRouter.get("/:email", validateUserEmail, userController.getUserByEmail); // Get User By Email
 userRouter.post("/", isAdmin, validateCreateUser, userController.createUser); // Admin only creation
-userRouter.patch("/:userId", validateUserId, validateUserEmail, validateUpdateUser, userController.updateUser);
-userRouter.delete("/:userId", isAdmin, validateUserId, userController.deleteUser);
+userRouter.patch("/:userId", isAdmin, validateUserId, validateUserEmail, validateUpdateUser, userController.updateUser); // Update User
+userRouter.delete("/:userId", isAdmin, validateUserId, userController.deleteUser); // Delete User
 
 export default {
     path: "/users",

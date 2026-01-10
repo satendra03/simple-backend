@@ -27,8 +27,8 @@ export class AuthController {
 
   signup = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { email, password, name } = req.body as SignupUserDto;
-      const user: CreateUserInput = AuthMapper.toSignupDto({email, password, name});
+      const { email, password, name, role } = req.body as SignupUserDto;
+      const user: CreateUserInput = AuthMapper.toSignupInput({email, password, name, role});
 
       const token = await this.authService.signup(user);
       const response = AuthMapper.toResponseDto(token);

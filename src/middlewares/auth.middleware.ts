@@ -9,7 +9,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     try {
         const decoded = verifyToken(token);
         req.user = {
-            id: decoded.userId,
+            userId: decoded.userId,
             role: decoded.role
         };
         next();
