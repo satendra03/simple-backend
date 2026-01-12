@@ -25,6 +25,18 @@ export class AuthController {
     }
   };
 
+  logout = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { userId } = req.body;
+      await this.authService.logout(userId);
+      res.status(200).json(ApiResponse.success({
+        message: "Logout successful",
+      }));
+    } catch (error) {
+      next(error);
+    }
+  };
+
   signup = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { email, password, name, role } = req.body as SignupUserDto;
@@ -36,6 +48,19 @@ export class AuthController {
       res.status(201).json(ApiResponse.success({
         message: "Signup successful",
         data: response,
+      }));
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  refresh = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { refreshToken } = req.body;
+      const { accessToken } = await this.authService.refresh(refreshToken);
+      res.status(200).json(ApiResponse.success({
+        message: "Refresh successful",
+        data: { accessToken },
       }));
     } catch (error) {
       next(error);
