@@ -5,7 +5,7 @@ import path from "path";
 export const requestLogger = (req: Request, res: Response, next: NextFunction) => {
     res.on("finish", () => {
         const { method, originalUrl } = req;
-        const userId = req.user?.id || "Guest";
+        const userId = req.user?.userId|| "Guest";
 
         // Format time: YYYY-MM-DD HH:mm:ss
         const now = new Date();

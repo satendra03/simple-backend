@@ -4,6 +4,7 @@ export interface UserDb {
   email: string;
   password: string;
   role: "user" | "admin";
+  refreshToken: string | null;
 
   createdAt: Date;
   updatedAt: Date;

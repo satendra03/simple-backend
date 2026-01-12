@@ -14,6 +14,6 @@ productRouter.patch("/:productId", authMiddleware, isAdmin, validateProductId, v
 productRouter.delete("/:productId", authMiddleware, isAdmin, validateProductId, productController.deleteProduct); // Delete Product
 
 export default {
-    path: "/product",
+    path: "/products",
     router: productRouter
 };

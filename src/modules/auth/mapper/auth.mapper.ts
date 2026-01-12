@@ -3,9 +3,10 @@ import { AuthResponseDto } from "../dto/AuthResponse.dto.js";
 import { SignupUserDto } from "../dto/SignupUser.dto.js";
 
 export class AuthMapper {
-    static toResponseDto(token: string): AuthResponseDto {
+    static toResponseDto({accessToken, refreshToken}: {accessToken: string, refreshToken: string}): AuthResponseDto {
         return {
-            token,
+            accessToken,
+            refreshToken,
         };
     }
 
@@ -16,6 +17,7 @@ export class AuthMapper {
             password: password.trim(),
             name: name.trim(),
             role: role ?? "user",
+            refreshToken: null,
         };
     }
     

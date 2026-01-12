@@ -13,6 +13,6 @@ cartRouter.put("/:cartId", validateCartId, validateUpdateCart, cartController.up
 cartRouter.delete("/:cartId", validateCartId, cartController.deleteCart);
 
 export default {
-    path: "/cart",
+    path: "/carts",
     router: cartRouter
 };
