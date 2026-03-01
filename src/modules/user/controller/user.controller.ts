@@ -4,7 +4,7 @@ import { ApiResponse } from "@/shared/ApiResponse.js";
 import { UserService } from "../service/user.service.interface.js";
 
 export class UserController {
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService) { }
     getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const users = await this.userService.getAllUsers();
@@ -80,7 +80,7 @@ export class UserController {
             const userId = req.params.userId;
             const user = await this.userService.deleteUser(userId);
             const response = UserMapper.toResponseDto(user);
-            
+
             res.status(200).json(ApiResponse.success({
                 message: "User deleted successfully",
                 data: response

@@ -7,13 +7,13 @@ import { UpdateUserDto } from "../dto/UpdateUser.dto.js";
 export const validateCreateUser = (req: Request, res: Response, next: NextFunction) => {
     const user = req.body as CreateUserDto;
 
-    if(!user) return next(new BadRequestError("Invalid input"));
-    if(!user.name) return next(new BadRequestError("User name is required"));
-    if(!user.email) return next(new BadRequestError("User email is required"));
-    if(!user.password) return next(new BadRequestError("User password is required"));
-    if(!isEmail(user.email)) return next(new BadRequestError("Invalid user email"));
-    if(!isString(user.name)) return next(new BadRequestError("Invalid user name"));
-    if(!isString(user.password)) return next(new BadRequestError("Invalid user password"));
+    if (!user) return next(new BadRequestError("Invalid input"));
+    if (!user.name) return next(new BadRequestError("User name is required"));
+    if (!user.email) return next(new BadRequestError("User email is required"));
+    if (!user.password) return next(new BadRequestError("User password is required"));
+    if (!isEmail(user.email)) return next(new BadRequestError("Invalid user email"));
+    if (!isString(user.name)) return next(new BadRequestError("Invalid user name"));
+    if (!isString(user.password)) return next(new BadRequestError("Invalid user password"));
 
     next();
 }
